@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="generator" content="Hugo 0.104.2">
+  <title>The Garden</title>
+
+  <link href="/static/bootstrap.min.css" rel="stylesheet">
+    <script src="/static/js/jquery-3.6.3.min.js"></script>
+    <script src="/static/js/trade.js"></script>
+
+  <style>
+         .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+
+      .b-example-divider {
+        height: 3rem;
+        background-color: rgba(0, 0, 0, .1);
+        border: solid rgba(0, 0, 0, .15);
+        border-width: 1px 0;
+        box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+      }
+
+      .b-example-vr {
+        flex-shrink: 0;
+        width: 1.5rem;
+        height: 100vh;
+      }
+
+      .bi {
+        vertical-align: -.125em;
+        fill: currentColor;
+      }
+
+      .nav-scroller {
+        position: relative;
+        z-index: 2;
+        height: 2.75rem;
+        overflow-y: hidden;
+      }
+
+      .nav-scroller .nav {
+        display: flex;
+        flex-wrap: nowrap;
+        padding-bottom: 1rem;
+        margin-top: -1px;
+        overflow-x: auto;
+        text-align: center;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
+      }
+  </style>
+
+
+  <!-- Custom styles for this template -->
+  <link rel="stylesheet" href="/static/carousel.css">
+    <link rel="stylesheet" href="/static/grid.css">
+
+    <title>THE GARDENS MALL</title>
+</head>
+<body style ="background-color:rgb(229, 247, 229)">
+<header>
+    <nav class="navbar navbar-expand-md navbar-light fixed-top " style="background-color:green" >
+      <div class="container-fluid">
+        <a class="navbar-brand" href="{{ url_for('Main.hompage')}}"><img src="/static/images/Logo.png" style="background-color:white; object-fit:contain" height='60' width="60" class="image-fluid rounded-circle"></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+          aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+          <ul class="navbar-nav me-auto mb-2 mb-md-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href=" {{url_for('Main.hompage') }}">HOME</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link " href="{{ url_for('Main.trade') }}">TRADE</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link " href="{{ url_for('Main.shop') }}">SHOP</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" style="{{ url_for('Main.notice') }}">NOTICE</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('Main.customer_service') }}">CUSTOMER SERVICE</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+ <!-- USER INFORMATION -->
+  <section class="" style="background-color: #9de2ff; margin-top: 20px; ">
+            <div class="container py-5 h-100">
+                <div class="row d-flex justify-content-center align-items-center h-100">
+                    <div class="col col-md-9 col-lg-7 col-xl-5">
+                        <div class="card" style="border-radius: 15px;">
+                            <div class="card-body p-4">
+                                <div class="d-flex text-black">
+                                    <div class="flex-shrink-0">
+
+                                    </div>
+                                    <div class="flex-grow-1 ms-3">
+                                        <h6 class="mb-1">{{ investor.name }}</h6>
+                                        <p class="mb-2 pb-1" style="color: #2b2a2a;">{{ investor.vip }} shop owner</p>
+                                        <div class="d-flex justify-content-start rounded-3 p-2 mb-2"
+                                            style="background-color: #efefef;">
+                                            <div>
+                                                <p class="small text-muted mb-1">Shop Level</p>
+                                                <p class="mb-0">{{ investor.vip }}</p>
+                                            </div>
+                                            <div class="px-3">
+                                                <p class="small text-muted mb-1">Account Balance</p>
+                                                <p class="mb-0">{{ investor.balance }}</p>
+                                            </div>
+                                            <div>
+                                                <p class="small text-muted mb-1">Shop Income</p>
+                                                <p class="mb-0">{{ investor_vip.daily_income }}</p>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+  <!--Invite -->
+    <h2 style="margin:10px">Welcome To Shop</h2>
+ <!--Buttons -->
+
+    <div class="row mb-3 text-center" style="font-size:0.8rem">
+      <div class="col-4 themed-grid-col"><a href="{{ url_for('Main.deposit_record') }}"><button>Deposit</button> </a></div>
+      <div class="col-4 themed-grid-col"><a href="{{ url_for('Main.withdrawal_record') }}"><button>Withdrawal</button> </a></div>
+      <div class="col-4 themed-grid-col"> <a href="{{ url_for('Main.pending_record') }}"> <button>Pending</button> </a></div>
+    </div>
+ <div style="margin : 20px">
+
+    <div class="row mb-3 text-center" style="font-size:0.8rem">
+      <div class="col-6 themed-grid-col">Current Balance: </div>
+      <div class="col-6 themed-grid-col"> {{ investor.balance }} </div>
+    </div>
+    <div class="row mb-3 text-center" style="font-size:0.8rem">
+      <div class="col-6 themed-grid-col">Today Income: </div>
+      <div class="col-6 themed-grid-col"> {{ investor.total_income }} </div>
+    </div>
+    <div class="row mb-3 text-center" style="font-size:0.8rem">
+      <div class="col-6 themed-grid-col">Today Team Income: </div>
+      <div class="col-6 themed-grid-col"> {{ investor.total_deposit }} </div>
+    </div>
+     <div class="row mb-3 text-center" style="font-size:0.8rem">
+      <div class="col-6 themed-grid-col">Trade Type: </div>
+      <div class="col-6 themed-grid-col"> {{ investor_vip.trade_type }} </div>
+    </div>
+     {%  with messages=get_flashed_messages() %}
+								 {% if messages %}
+									<div class="w-100 " style="background-color:#28a745; color:black; font-size=1.5rem">
+									<p style="margin:10px">{{messages[0]}}</p>
+									</div>
+								{% endif %}
+								{% endwith %}
+     <div style="display:flex; justify-content:center" >
+         <a href=" {{ url_for('Main.perform_trade') }}">  <button class="btn btn-primary btn-lg ">Trade</button> </a>
+     </div>
+
+
+
+
+
+
+
+    <footer class="navbar-dark fixed-bottom " style="display:flex; background-color:green; align-items:center; font-weight:bold; font-size:1rem; height:3rem;justify-content:space-evenly; color:black;)">
+        <div>
+             <a href="{{ url_for('Main.hompage') }}">HOME</a>
+           </div>
+        <div >
+             <a href=" {{ url_for('Main.trade') }} "> TRADE </a>
+           </div>
+
+           <div >
+             <a href="{{ url_for('Main.shop') }}">SHOPS </a>
+           </div>
+           <div class="nav-item">
+               <a href="{{ url_for('Main.profile') }}"> PROFILE </a>
+           </div>
+
+    </footer>
+</div>
+
+</body>
+ <script src="/static/js/bootstrap.bundle.min.js"></script>
+ <script src="/static/js/trade.js"></script>
+</html>

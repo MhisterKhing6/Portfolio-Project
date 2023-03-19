@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>GARDENS MALL</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="/static/boostrap.min.css">
+
+</head>
+
+<body>
+    <section class="ftco-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-12 col-lg-10">
+                    <div class="wrap d-md-flex">
+                        <div class="img" style="background-image: url(/static/images/Logo.png); background-size:contain">
+                        </div>
+                        <div class="login-wrap p-4 p-md-5">
+                            <div class="d-flex">
+                                <div class="w-100">
+                                    <h3 class="mb-4">Change Password</h3>
+                                </div>
+                                {% with messages=get_flashed_messages() %}
+                                {% if messages %}
+                                <div class="w-100" style="background-color:red; color:black; font-size=1.5rem">
+                                    <p style="margin:10px">{{messages[0]}}</p>
+                                </div>
+                                {% endif %}
+                                {% endwith %}
+
+                            </div>
+                            <form action="{{url_for('Main.change_pwd')}}" method="post" class="signin-form">
+
+                                <div class="form-group mb-3">
+                                    <label class="label" for="number">Tel Number</label>
+                                    <input type="tel" id="number" name="number" class="form-control"
+                                        placeholder="+233xxxxxxxxx" required>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label class="label" for="email">Email</label>
+                                    <input type="email" id="email" name="email" class="form-control"
+                                        placeholder="Email" required>
+                                </div>
+
+
+                                <div class="form-group mb-3">
+                                    <label class="label" for="pwd">New Password</label>
+                                    <input type="password" class="form-control" id="pwd" name="pwd"
+                                        placeholder="Password" required>
+
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label class="label" for="pass1">Confirm Password</label>
+                                    <input type="password" class="form-control" id="pass1" name="pass1"
+                                        placeholder="Confirm password" required>
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="form-control btn  rounded submit px-3" style="background-color:green">RESET
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+</body>
+
+</html>
