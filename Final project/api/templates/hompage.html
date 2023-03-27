@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="">
   <meta name="generator" content="Hugo 0.104.2">
-  <title>The Garden</title>
+  <title>STOCK TRADE</title>
 
   <link href="/static/bootstrap.min.css" rel="stylesheet">
 
@@ -71,9 +71,9 @@
 <body style="background-color:rgb(229, 247, 229)">
 
   <header>
-    <nav class="navbar navbar-expand-md navbar-light fixed-top " style="background-color:green">
+    <nav class="navbar navbar-expand-md navbar-light fixed-top " style="background-color:rgb(53, 210, 192)">
       <div class="container-fluid">
-        <!-- <a class="navbar-brand" href="#"><img src="/static/images/Logo.png" style="background-color:white; object-fit:contain" height='60' width="60" class="image-fluid rounded-circle"></a> -->
+        <a class="navbar-brand" href="#"><img src="/static/images/logo/png/logo-color.png" style="background-color:white; object-fit:contain" height='60' width="60" class="image-fluid rounded-circle"></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
           aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -87,7 +87,7 @@
               <a class="nav-link" href="{{ url_for('Main.trade') }}">TRADE</a>
             </li>
             <li class="nav_item">
-              <a class="nav-link" href="{{ url_for('Main.shop') }}">SHOPS</a>
+              <a class="nav-link" href="{{ url_for('Main.shop') }}">STOCKS</a>
             </li>
             <li class="nav-item">
               <a class="nav-link " href="{{ url_for('Main.notice') }}">NOTICE</a>
@@ -117,12 +117,12 @@
       </div>
       <div class="carousel-inner">
         <div class="carousel-item active">
-          <img class="img-fluid" style="height:100%; width:100%; opacity:0.8" src="/static/images/c1.jpg">
+          <img class="img-fluid" style="height:100%; width:100%; opacity:0.7" src="/static/images/logo/png/logo-color.png">
 
           <div class="container">
             <div class="carousel-caption text-start">
               <h3 style="font-weight:bold; color:black">Welcome {{name}} </h3>
-              <p style="color:brown; font-size:1rem; font-weight:bold;">to GARDENS MALL</p>
+              <p style="color:brown; font-size:1rem; font-weight:bold;">to STOCK TRADE</p>
               <p><a class="btn btn-lg btn-primary bg-danger" href="{{ url_for('Main.profile' ) }}">PROFILE</a></p>
             </div>
           </div>
@@ -133,9 +133,9 @@
           <div class="container">
             <div class="carousel-caption">
 
-              <p style="color:black; font-size:1.5rem; font-weight:bold">Check the Wholesale Shops for different levels
-                of trades.</p>
-              <p><a class="btn btn-lg btn-primary bg-danger" href="{{ url_for('Main.shop') }}">SHOP</a></p>
+              <p style="color:black; font-size:1.5rem; font-weight:bold">Check the Stocks packages here
+                </p>
+              <p><a class="btn btn-lg btn-primary bg-danger" href="{{ url_for('Main.shop') }}">STOCKS</a></p>
             </div>
           </div>
         </div>
@@ -199,11 +199,11 @@
           <div class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg"
             role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false">
             <title>Placeholder</title>
-            <img src="/static/images/vip.jpg" class="img-fluid, rounded-circle" width="140" height="140">
+            <img src="/static/images/stocks.png" class="img-fluid, rounded-circle" width="140" height="140">
           </div>
 
-          <h2 class="fw-normal">SHOPS</h2>
-          <p>{{ name }} you can check shop levels packages available in the wholesale shops here.</p>
+          <h2 class="fw-normal">STOCKS</h2>
+          <p>{{ name }} you can check Stocks  packages available  here.</p>
           <p><a class="btn btn-secondary btn-danger" href=" {{ url_for('Main.shop') }}">STOCKS&raquo;</a></p>
         </div><!-- /.col-lg-4 -->
         <div class="col-lg-4">
@@ -244,12 +244,12 @@
     </div>
   </main>
   <footer class="flex-buttom fixed-bottom "
-    style="display:flex; background-color:green; align-items:center; font-weight:bold; font-size:1rem; height:3rem;justify-content:space-evenly; color:black;)">
+    style="display:flex; background-color:rgb(53, 210, 192); align-items:center; font-weight:bold; font-size:1rem; height:3rem;justify-content:space-evenly; color:black;)">
     <div>
       <a href="{{ url_for('Main.trade') }}"> TRADE </a>
     </div>
     <div>
-      <a href="{{ url_for('Main.shop') }}">STOCSK</a>
+      <a href="{{ url_for('Main.shop') }}">STOCKS</a>
     </div>
     <div>
       <a href="{{ url_for('Main.profile') }}">PROFILE </a>

@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 from flask import Flask, Blueprint, session
 session_managment = session
-from api import app
+from  api import app
 run_app = Flask(__name__)
 run_app.secret_key = "9%8%7521kofikofi"
 
