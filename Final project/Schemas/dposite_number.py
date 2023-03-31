@@ -24,7 +24,6 @@ class Deposits_numbers(Common, Base):
     number = Column(String(30), nullable=False)
 
 
-
     def __init__(self, **kwargs):
         for key, value in kwargs.items():
             self.__setattr__(key, value)

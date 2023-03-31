@@ -2,15 +2,12 @@ from sqlalchemy import Column, ForeignKey, String, Numeric, Integer, Identity,Bo
 from Schemas import Base
 from Schemas.base import Common
 """
-Define the investor
+Define the Admin
  Attributes
     ID : user id
     Number : user registered Number
-    Superior ID : User invitor Id
-    Balance : Amount Balance
-    withdrwals : List of withdrawals
-    pending_withdrawals : User current withdrawal not processed
-    deposite : List of total amount deposited by the user
+    name : name of admin
+    password : password of investor
 """
 
 

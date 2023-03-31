@@ -1,3 +1,4 @@
+"""Interface for Database"""
 from Schemas import Base
 from Schemas.Investor import Investor
 from Schemas.vip import Vip
@@ -32,19 +33,31 @@ class Db_engine:
         self.__session = Session
 
     def get_all_vip(self):
+        """
+        Return all Stocks in the database
+        :return: all Stocks in list
+        """
         vips = self.__session.query(Vip)
         vt = [v for v in vips if v.id != "VIP0"]
         return vt
     def get_vip_by_id(self, id):
+        """
+        Get Stock by Stock Id
+        :param id: The Id of the stock
+        :return: An instance of Stock
+        """
         return self.__session.query(Vip).filter(Vip.id == id).first()
+
     def get_deposit_number(self, vendor):
-        return self.__session.query(Deposits_numbers).filter(Deposits_numbers.type == vendor).first()
+        """Return the deposit number from deposits"""
+        return self.__session.query(Deposits_numbers).\
+            filter(Deposits_numbers.type == vendor).first()
 
     def create_investor(self, data):
         """
         Create a new Investor
-        .Create an investor instance from data
-        .Add teh instance to the database
+        .Create an investor instance from dictionary data
+        .Add the instance to the database
         .Commit changes
         :param data: Contains the user information
         :return: None
@@ -84,11 +97,20 @@ class Db_engine:
             return 1
         else:
             return 2
+
     def reject_from_pending(self, id, type):
+        """
+        Reject from Database Instance
+        :param id: The transaction  id to reject
+        :param type: The type of transaction withdrawal or deposits
+        :return: true if success or false if anything else
+        """
         if type == 'W':
-            trans =self.__session.query(Pending).filter(Pending.id == id).first()
+            trans = self.__session.query(Pending).\
+                filter(Pending.id == id).first()
             if trans:
-                investor = self.__session().query(Investor).filter(Investor.id == trans.investor_id.firs).first()
+                investor = self.__session().query(Investor).\
+                    filter(Investor.id == trans.investor_id.firs).first()
                 investor.balance += trans.amount
                 trans.number = "R " + str(trans.number)
                 data = {"date": trans.date, "number": trans.number, "investor_id": trans.investor_id, "amount":trans.amount}
@@ -100,9 +122,11 @@ class Db_engine:
             else:
                 return False
         else:
-            trans = self.__session.query(Deposit_pending).filter(Deposit_pending.id == id).first()
+            trans = self.__session.query(Deposit_pending).\
+                filter(Deposit_pending.id == id).first()
             if trans:
-                investor = self.__session().query(Investor).filter(Investor.id == trans.investor_id).first()
+                investor = self.__session().query(Investor).\
+                    filter(Investor.id == trans.investor_id).first()
                 trans.number = "R" + str(trans.number)
                 data = {"date": trans.date, "number": trans.number, "investor_id": trans.investor_id,
                         "amount": trans.amount, "trans_id": trans.trans_id}
@@ -113,15 +137,25 @@ class Db_engine:
                 return True
             else:
                 return False
+
     def accept_from_pending(self, id, type):
+        """
+               Accept transaction from pending
+               :param id: The transaction  id to accept
+               :param type: The type of transaction withdrawal or deposits
+               :return: true if success or false if anything else
+               """
         if type == 'W':
-            trans =self.__session.query(Pending).filter(Pending.id == id).first()
+            trans = self.__session.query(Pending).\
+                filter(Pending.id == id).first()
             if trans:
-                investor = self.__session().query(Investor).filter(Investor.id == trans.investor_id).first()
+                investor = self.__session().query(Investor).\
+                    filter(Investor.id == trans.investor_id).first()
                 investor.balance -= trans.amount
                 investor.total_withdrawal += trans.amount
                 trans.number = "A " + str(trans.number)
-                data = {"date": trans.date, "number": trans.number, "investor_id": trans.investor_id, "amount":trans.amount}
+                data = {"date": trans.date, "number": trans.number,
+                        "investor_id": trans.investor_id, "amount":trans.amount}
                 withdrawal = Withdrawal(**data)
                 self.__session.delete(trans)
                 self.__session.add(withdrawal)
@@ -130,13 +164,16 @@ class Db_engine:
             else:
                 return False
         else:
-            trans = self.__session.query(Deposit_pending).filter(Deposit_pending.id == id).first()
+            trans = self.__session.query(Deposit_pending).\
+                filter(Deposit_pending.id == id).first()
             if trans:
-                investor = self.__session().query(Investor).filter(Investor.id == trans.investor_id).first()
+                investor = self.__session().query(Investor)\
+                    .filter(Investor.id == trans.investor_id).first()
                 trans.number = "A " + str(trans.number)
                 investor.balance += trans.amount
                 investor.total_deposit += trans.amount
-                data = {"date": trans.date, "number": trans.number, "investor_id": trans.investor_id,
+                data = {"date": trans.date, "number": trans.number,
+                        "investor_id": trans.investor_id,
                         "amount": trans.amount, "trans_id": trans.trans_id}
                 deposit = Deposit(**data)
                 self.__session.add(deposit)
@@ -150,17 +187,22 @@ class Db_engine:
 
 
     def get_all_deposite_pending(self):
+        """Return deposit all value in pending table"""
         return self.__session().query(Deposit_pending).all()
 
     def get_all_withdrawal_pending(self):
+        """Return Withdrawal all value in pending table"""
         return self.__session().query(Pending).all()
 
     def add_admin(self, admin):
+        """Add Admin Info"""
         self.__session.add(admin)
         self.__session.commit()
 
     def get_admin_by_number(self, number):
-        return self.__session.query(Admins).filter(Admins.number == number).first()
+        """Return Admin Number"""
+        return self.__session.query(Admins).\
+            filter(Admins.number == number).first()
 
     def upgrade_vip(self, id, vip_id):
         """
@@ -172,11 +214,13 @@ class Db_engine:
         Ruturn Codes:
             1: purchased
             2: Low balance
-            False:The investor doesnt exist
+            False:The investor dosnt exist
         """
-        investor = self.__session.query(Investor).filter(Investor.id == id).first()
+        investor = self.__session.query(Investor).\
+            filter(Investor.id == id).first()
         if investor:
-            vip = self.__session.query(Vip).filter(Vip.id == vip_id).first()
+            vip = self.__session.query(Vip).\
+                filter(Vip.id == vip_id).first()
             if investor.vip > vip_id:
                 return 4
             if investor.vip == vip_id:
@@ -185,7 +229,8 @@ class Db_engine:
                 if investor.balance >= vip.price:
                     investor.balance -= vip.price
                     investor.vip = vip.id
-                    superior = self.__session.query(Investor).filter(Investor.id == investor.super_id).first()
+                    superior = self.__session.query(Investor).\
+                        filter(Investor.id == investor.super_id).first()
                     if superior:
                         superior.balance += vip.bonus
                 else:
@@ -195,12 +240,15 @@ class Db_engine:
             else:
                 return 3
 
-
-
     def add_winfo(self, number, data):
+        """Add withdrawal Information to a database
+        investor : The investor to add W info
+        W_info : Withdrawal info
+        """
         investor = self.get_investor_by_number(number)
         W_info = WithdrawalInfo(**data)
-        wll = self.__session.query(WithdrawalInfo).filter(WithdrawalInfo.investor_id == investor.id).first()
+        wll = self.__session.query(WithdrawalInfo).\
+            filter(WithdrawalInfo.investor_id == investor.id).first()
         if wll:
             self.__session.delete(wll)
         self.__session.add(W_info)
@@ -243,6 +291,10 @@ class Db_engine:
                     return 4
 
     def deposite(self, id, amount):
+        """Add deposit to database
+            id : id of the investor
+            amount : to deposit
+            """
         investor = self.__session.query(Investor).filter(Investor.id == id).first()
         if investor:
             vip = self.__session.query(Vip).filter(Vip.id == investor.id)
@@ -251,7 +303,12 @@ class Db_engine:
             return True
         else:
             return False
+
+
     def depsoit_pending(self, data):
+        """Put deposit Info to deposit pending db
+            date : A map that contains value to form instance
+        """
         dt = datetime.now()
         date = dt.strftime("%m/%d/%Y")
         data["date"] = date
@@ -259,7 +316,28 @@ class Db_engine:
         self.__session.add(dpending)
         self.__session.commit()
 
+    def confirm(self, id, type):
+        if type == 'D':
+            transaction = self.__session.query(Deposit_pending).\
+                filter(Pending.id == id).first()
+            if transaction:
+                self.__session.remove(transaction)
+                return True
+            else:
+                return False
+        else:
+
+            transaction = self.__session.query(Deposit_pending). \
+                filter(Pending.id == id).first()
+            if transaction:
+                self.__session.remove(transaction)
+                return True
+            else:
+                    return False
+
+
     def remove_from_pending(self, id):
+        """Remove Id from pending"""
         transaction = self.__session.query(Pending).filter(Pending.id == id).first()
         if transaction:
             self.__session.remove(transaction)
@@ -268,6 +346,7 @@ class Db_engine:
             return False
 
     def get_investor_by_number(self, number):
+        """Get Investor Instance by number"""
         investor = self.__session.query(Investor).filter(Investor.number == number).first()
         if investor:
             return investor
@@ -275,6 +354,7 @@ class Db_engine:
             return False
 
     def get_investor_by_id(self, id):
+        """Get investor instance by id"""
         investor = self.__session.query(Investor).filter(Investor.id == id).first()
         if investor:
             return investor
@@ -282,9 +362,11 @@ class Db_engine:
             return False
 
     def change_password(self, number, pwd):
+        """Change password of investor"""
         self.get_investor_by_number(number).password = pwd
         self.__session.commit()
 
     def get_teams(self, investor):
+        """Get Investor Team"""
         return self.__session.query(Investor).filter(Investor.super_id == investor.id).all()
 

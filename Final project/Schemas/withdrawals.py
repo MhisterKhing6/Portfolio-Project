@@ -9,8 +9,7 @@ Investor withdrawal from the system
     ID : Unique id to identify the withdrawal
     Number : The number that recieved the withdrawal
     investor_id : The investor that issued the withdrawal
-    amount : amount withdrawal
-    
+    amount : amount withdrawal   
 """
 
 
@@ -21,7 +20,6 @@ class Withdrawal(Common, Base):
     amount = Column(Numeric(10, 2), nullable=False)
     number = Column(String(30), nullable=False)
     date = Column(String(30), nullable=False)
-
 
     def __init__(self, **kwargs):
         for key, value in kwargs.items():

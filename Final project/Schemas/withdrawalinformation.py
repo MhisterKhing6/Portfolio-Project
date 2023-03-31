@@ -11,9 +11,8 @@ Investor withdrawal from the system
     Number : The number that received the withdrawal
     investor_id : The investor that issued the withdrawal
     amount : amount withdrawal
-
+    number_type: Vendor of number
 """
-
 
 class WithdrawalInfo(Common, Base):
     __tablename__ = "withdrawal_information"

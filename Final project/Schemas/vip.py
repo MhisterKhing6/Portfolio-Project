@@ -3,17 +3,19 @@ from Schemas import Base
 import uuid
 from sqlalchemy.orm import relationship
 
-"""
-Level of Vips and incomes
- Attributes
-    id : Name of the vip level
-    price: The price to purchase the vip
-    daily_income : The amount the vip will generate each day
-
-"""
 
 
 class Vip(Base):
+    """
+    Level of Vips and incomes
+     Attributes
+        id : Name of the vip level
+        price: The price to purchase the vip
+        daily_income : The amount the vip will generate each day
+        daily_bonus : The daily profit the user will receive each day
+
+    """
+
     __tablename__ = "vips"
     id = Column(String(60), primary_key=True)
     price = Column(Numeric(10, 2), nullable=False)

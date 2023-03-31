@@ -1,22 +1,21 @@
+"""Deposit Schema"""
 from sqlalchemy import Column, ForeignKey, String, Numeric,  Integer
 from Schemas import Base
 from Schemas.base import Common
-import uuid
 from sqlalchemy.orm import relationship
 
 
-"""
-Investor withdrawal from the system
- Attributes
-    ID : Unique id to identify the Deposits
-    Number : Number Use for Deposits
-    investor_id : The investor that issued the withdrawal
-    amount : Amount Deposited
-
-"""
-
-
 class Deposit(Common, Base):
+    """
+    Investor deposited into the system
+     Attributes
+        ID : Unique id to identify the Deposits
+        Number : Number Use for Deposits
+        investor_id : The investor that issued the withdrawal
+        amount : Amount Deposited
+        date: the date the transaction incurred
+
+    """
     __tablename__ = "deposits"
     id = Column(Integer, primary_key=True, autoincrement=True)
     investor_id = Column(Integer, ForeignKey("investors.id"), nullable=False)
