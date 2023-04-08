@@ -1,4 +1,4 @@
-Trade Share
+#Trade Share
 provides a plateform for companies to buy and sell shares to the Investres.
 The project run on flas framework on port 5000.
 Starting the project
